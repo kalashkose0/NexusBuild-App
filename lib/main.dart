@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexusbuild/Screens/homeScreen/mainhomeScreen.dart';
 import 'package:nexusbuild/Screens/otpScreen/otpScreen.dart';
 import 'package:nexusbuild/Screens/signupScreen/signupScreen.dart';
 import 'package:nexusbuild/Screens/splashScreen.dart';
@@ -16,10 +17,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'NexusBuild',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      // home: SplashScreen(),
+      home: Mainhomescreen(),
     );
   }
 }
