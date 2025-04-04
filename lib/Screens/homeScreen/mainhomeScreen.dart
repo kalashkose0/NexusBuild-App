@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 
-class Mainhomescreen extends StatelessWidget {
+class Mainhomescreen extends StatefulWidget {
   const Mainhomescreen({super.key});
+
+  @override
+  State<Mainhomescreen> createState() => _MainhomescreenState();
+}
+
+class _MainhomescreenState extends State<Mainhomescreen> {
+  bool _agreedToTerms = false;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +50,7 @@ class Mainhomescreen extends StatelessWidget {
                 children: [
                   // Logo
                   Image.asset(
-                    'assets/images/tower.png', // Replace with your logo
+                    'assets/images/tower.png',
                     height: 100,
                   ),
                   SizedBox(height: 30),
@@ -85,15 +92,38 @@ class Mainhomescreen extends StatelessWidget {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(height: 40),
+                  SizedBox(height: 30),
+
+                  // Terms & Conditions Checkbox
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _agreedToTerms,
+                        onChanged: (value) {
+                          setState(() {
+                            _agreedToTerms = value!;
+                          });
+                        },
+                      ),
+                      Expanded(
+                        child: Text(
+                          'I agree to the Terms & Conditions',
+                          style: TextStyle(fontSize: 13),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10),
 
                   // Button: Civil Engineer
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        // Navigate to Civil Engineer screen
-                      },
+                      onPressed: _agreedToTerms
+                          ? () {
+                              // Navigate to Civil Engineer screen
+                            }
+                          : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.black,
                         foregroundColor: Colors.white,
@@ -116,9 +146,11 @@ class Mainhomescreen extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
-                      onPressed: () {
-                        // Navigate to Worker screen
-                      },
+                      onPressed: _agreedToTerms
+                          ? () {
+                              // Navigate to Worker screen
+                            }
+                          : null,
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.amber,
                         foregroundColor: Colors.black,

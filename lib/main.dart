@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nexusbuild/Screens/homeScreen/Worker/worker.dart';
 import 'package:nexusbuild/Screens/homeScreen/mainhomeScreen.dart';
 import 'package:nexusbuild/Screens/otpScreen/otpScreen.dart';
 import 'package:nexusbuild/Screens/signupScreen/signupScreen.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       // home: SplashScreen(),
-      home: Mainhomescreen(),
+      home: WorkerScreen(),
     );
   }
 }
