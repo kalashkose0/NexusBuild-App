@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:nexusbuild/Screens/homeScreen/CivilEngineer/civilEngineer.dart';
+import 'package:nexusbuild/Screens/homeScreen/Worker/worker.dart';
 
 class Mainhomescreen extends StatefulWidget {
   const Mainhomescreen({super.key});
@@ -122,6 +124,10 @@ class _MainhomescreenState extends State<Mainhomescreen> {
                       onPressed: _agreedToTerms
                           ? () {
                               // Navigate to Civil Engineer screen
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CivilEngineer()));
                             }
                           : null,
                       style: ElevatedButton.styleFrom(
@@ -148,7 +154,10 @@ class _MainhomescreenState extends State<Mainhomescreen> {
                     child: ElevatedButton(
                       onPressed: _agreedToTerms
                           ? () {
-                              // Navigate to Worker screen
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WorkerScreen()));
                             }
                           : null,
                       style: ElevatedButton.styleFrom(

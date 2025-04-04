@@ -89,13 +89,18 @@ class _SplashScreenState extends State<SplashScreen> {
                   ],
                 ),
 
-                Text(
-                  "Central Hub For Construction Professionals",
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey.shade700,
-                    letterSpacing: 2,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Central Hub For Construction Professionals",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.grey.shade700,
+                        letterSpacing: 2,
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
