@@ -1,28 +1,26 @@
-// import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'auth_state.dart';
 
-// abstract class AuthState extends Equatable {
-//   @override
-//   List<Object?> get props => [];
-// }
+class AuthCubit extends Cubit<AuthState> {
+  AuthCubit() : super(AuthInitial());
 
-// class AuthInitial extends AuthState {}
+  final String _mockOtp = '1234';
 
-// class AuthLoading extends AuthState {}
+  void sendOtp(String phoneNumber) async {
+    emit(AuthLoading());
+    await Future.delayed(Duration(seconds: 2)); // mock delay
+    emit(AuthCodeSent(phoneNumber));
+  }
 
-// class AuthCodeSent extends AuthState {
-//   final String phoneNumber;
-//   AuthCodeSent(this.phoneNumber);
+  void verifyOtp(String enteredOtp) {
+    if (enteredOtp == _mockOtp) {
+      emit(AuthVerified());
+    } else {
+      emit(AuthError("Invalid OTP, please try again"));
+    }
+  }
 
-//   @override
-//   List<Object?> get props => [phoneNumber];
-// }
-
-// class AuthVerified extends AuthState {}
-
-// class AuthError extends AuthState {
-//   final String message;
-//   AuthError(this.message);
-
-//   @override
-//   List<Object?> get props => [message];
-// }
+  void reset() {
+    emit(AuthInitial());
+  }
+}
