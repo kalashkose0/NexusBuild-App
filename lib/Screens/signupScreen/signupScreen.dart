@@ -7,6 +7,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final _formKey = GlobalKey<FormState>(); // ✅ Define this here
   TextEditingController nameController = TextEditingController();
   TextEditingController mobileController = TextEditingController();
 
@@ -15,31 +16,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(children: [
-        // Top Right Semi-Circle
-        Positioned(
-          top: -50,
-          right: -50,
-          child: ClipOval(
-            child: Container(
-              width: 150,
-              height: 150,
-              color: Colors.amber,
-            ),
-          ),
-        ),
+        // Your Positioned widgets (top and bottom circles)...
 
-        // Bottom Left Semi-Circle
-        Positioned(
-          bottom: -60,
-          left: -60,
-          child: ClipOval(
-            child: Container(
-              width: 180,
-              height: 180,
-              color: Colors.amber,
-            ),
-          ),
-        ),
         Align(
           alignment: Alignment.center,
           child: SingleChildScrollView(
@@ -88,59 +66,84 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 SizedBox(height: 20),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: [
-                      TextField(
-                        controller: nameController,
-                        decoration: InputDecoration(
-                          hintText: "NAME",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                  child: Form(
+                    key: _formKey, // ✅ Use the form key here
+                    child: Column(
+                      children: [
+                        TextFormField(
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            hintText: "NAME",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your name';
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                      SizedBox(height: 15),
-                      TextField(
-                        controller: mobileController,
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          hintText: "Mobile/Number",
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10)),
+                        SizedBox(height: 15),
+                        TextFormField(
+                          controller: mobileController,
+                          keyboardType: TextInputType.number,
+                          decoration: InputDecoration(
+                            hintText: "Mobile/Number",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your mobile number';
+                            } else if (value.length != 10) {
+                              return 'Mobile number should be 10 digits';
+                            }
+                            return null;
+                          },
                         ),
-                      ),
-                      SizedBox(height: 15),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.black,
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OtpScreen()));
-                        },
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 15, horizontal: 50),
-                          child: Text("Sign In/Up"),
+                        SizedBox(height: 15),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              foregroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              // Proceed only if form is valid
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => OtpScreen()),
+                              );
+                            }
+                          },
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 15, horizontal: 50),
+                            child: Text("Sign In/Up"),
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 20),
-                      Text("OR", style: TextStyle(color: Colors.grey)),
-                      SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset('assets/images/google.png', height: 40),
-                          SizedBox(width: 30),
-                          Image.asset('assets/images/facebook.png', height: 40),
-                          SizedBox(width: 30),
-                          Image.asset('assets/images/twitter.png', height: 40),
-                        ],
-                      ),
-                    ],
+                        SizedBox(height: 20),
+                        Text("OR", style: TextStyle(color: Colors.grey)),
+                        SizedBox(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/images/google.png', height: 40),
+                            SizedBox(width: 30),
+                            Image.asset('assets/images/facebook.png',
+                                height: 40),
+                            SizedBox(width: 30),
+                            Image.asset('assets/images/twitter.png',
+                                height: 40),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(height: 30),
