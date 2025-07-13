@@ -13,7 +13,8 @@ void main() {
       providers: [
         BlocProvider<AuthCubit>(create: (_) => AuthCubit()),
         // BlocProvider<WorkerCubit>(create: (_) => WorkerCubit()),
-        // Add more here as needed
+        // Add more here
+        // as needed
       ],
       child: MyApp(),
     ),
